@@ -29,14 +29,16 @@ def main():
             print("Could not make")
 
     for file in os.listdir(dir):
-        if file.endswith(supported_images):
-            image = Image.open(file)
-            new_name = str(out_dir) + "/" + str(image.filename) + ".webp"
+        if file.endswith(supported_images): 
+            filepath = f"{dir}/{file}"
+            image = Image.open(filepath)
+            # new_name = str(out_dir) + "/" + str(image.filename) + ".webp"
+            new_name = f"{out_dir}/{file}.webp"
             try:
                 image.save(new_name, 'webp', optimize=True, quality = arguments.quality)
                 print("Saved " + new_name)
-            except:
-                print("Error saving " + new_name)
+            except Exception as e:
+                print(f"Error saving {new_name} ({e})")
 
 
 if __name__ == '__main__':
